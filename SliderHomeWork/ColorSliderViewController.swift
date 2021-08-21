@@ -20,23 +20,20 @@ class ColorSliderViewController: UIViewController {
     @IBOutlet weak var greenColorSlider: UISlider!
     @IBOutlet weak var blueColorSlider: UISlider!
     
-    // MARK: - Private properties
-
     // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpDisplayColorView()
         setUpSliders()
-        changeDisplayColorView()
     }
     
     override func viewWillLayoutSubviews() {
         redVelueLabel.text = String(format:"%.2f", redColorSlider.value)
         greenValueLabel.text = String(format:"%.2f", greenColorSlider.value)
         blueValueLabel.text = String(format:"%.2f", blueColorSlider.value)
+        
+        changeDisplayColorView()
     }
-    
-    
     
     // MARK: - IBActions
     @IBAction func redSliderValueChanged() {
@@ -65,10 +62,8 @@ class ColorSliderViewController: UIViewController {
     }
     
     private func setUpSliders() {
-        redColorSlider.tintColor = .red
-        greenColorSlider.tintColor = .green
-        blueColorSlider.tintColor = .blue
+        redColorSlider.tintColor = UIColor(named: "RedAppColor") ?? .red
+        greenColorSlider.tintColor = UIColor(named: "GreenAppColor") ?? .green
+        blueColorSlider.tintColor = UIColor(named: "BlueAppColor") ?? .blue
     }
-    
-
 }
