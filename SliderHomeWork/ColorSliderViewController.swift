@@ -8,22 +8,67 @@
 import UIKit
 
 class ColorSliderViewController: UIViewController {
+    // MARK: - IBOutlets
+    
+    @IBOutlet weak var displayColorView: UIView!
+    
+    @IBOutlet weak var redVelueLabel: UILabel!
+    @IBOutlet weak var greenValueLabel: UILabel!
+    @IBOutlet weak var blueValueLabel: UILabel!
+    
+    @IBOutlet weak var redColorSlider: UISlider!
+    @IBOutlet weak var greenColorSlider: UISlider!
+    @IBOutlet weak var blueColorSlider: UISlider!
+    
+    // MARK: - Private properties
 
+    // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setUpDisplayColorView()
+        setUpSliders()
+        changeDisplayColorView()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillLayoutSubviews() {
+        redVelueLabel.text = String(format:"%.2f", redColorSlider.value)
+        greenValueLabel.text = String(format:"%.2f", greenColorSlider.value)
+        blueValueLabel.text = String(format:"%.2f", blueColorSlider.value)
     }
-    */
+    
+    
+    
+    // MARK: - IBActions
+    @IBAction func redSliderValueChanged() {
+        redVelueLabel.text = String(format:"%.2f", redColorSlider.value)
+        changeDisplayColorView()
+    }
+    
+    @IBAction func greenSliderValueChanged() {
+        greenValueLabel.text = String(format:"%.2f", greenColorSlider.value)
+        changeDisplayColorView()
+    }
+    
+    @IBAction func blueSliderValueChanged() {
+        blueValueLabel.text = String(format:"%.2f", blueColorSlider.value)
+        changeDisplayColorView()
+    }
+    
+    // MARK: - Private methods
+
+    private func changeDisplayColorView() {
+        displayColorView.backgroundColor = UIColor(red: CGFloat(redColorSlider.value), green: CGFloat(greenColorSlider.value), blue: CGFloat(blueColorSlider.value), alpha: 1.0)
+    }
+    
+    private func setUpDisplayColorView() {
+        displayColorView.layer.cornerRadius = 20
+    }
+    
+    private func setUpSliders() {
+        redColorSlider.tintColor = .red
+        greenColorSlider.tintColor = .green
+        blueColorSlider.tintColor = .blue
+    }
+    
 
 }
