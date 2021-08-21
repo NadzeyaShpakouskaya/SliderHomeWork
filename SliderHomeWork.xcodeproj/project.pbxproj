@@ -9,21 +9,21 @@
 /* Begin PBXBuildFile section */
 		FDC3827626CFCBEE0001EE18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC3827526CFCBEE0001EE18 /* AppDelegate.swift */; };
 		FDC3827826CFCBEE0001EE18 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC3827726CFCBEE0001EE18 /* SceneDelegate.swift */; };
-		FDC3827A26CFCBEE0001EE18 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC3827926CFCBEE0001EE18 /* ViewController.swift */; };
 		FDC3827D26CFCBEE0001EE18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDC3827B26CFCBEE0001EE18 /* Main.storyboard */; };
 		FDC3827F26CFCBEF0001EE18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDC3827E26CFCBEF0001EE18 /* Assets.xcassets */; };
 		FDC3828226CFCBEF0001EE18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDC3828026CFCBEF0001EE18 /* LaunchScreen.storyboard */; };
+		FDDAA4C226D0B5D000370E26 /* ColorSliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDAA4C126D0B5D000370E26 /* ColorSliderViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FDC3827226CFCBEE0001EE18 /* SliderHomeWork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SliderHomeWork.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDC3827526CFCBEE0001EE18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDC3827726CFCBEE0001EE18 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FDC3827926CFCBEE0001EE18 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FDC3827C26CFCBEE0001EE18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FDC3827E26CFCBEF0001EE18 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FDC3828126CFCBEF0001EE18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FDC3828326CFCBEF0001EE18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDDAA4C126D0B5D000370E26 /* ColorSliderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSliderViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +58,7 @@
 			children = (
 				FDC3827526CFCBEE0001EE18 /* AppDelegate.swift */,
 				FDC3827726CFCBEE0001EE18 /* SceneDelegate.swift */,
-				FDC3827926CFCBEE0001EE18 /* ViewController.swift */,
+				FDDAA4C126D0B5D000370E26 /* ColorSliderViewController.swift */,
 				FDC3827B26CFCBEE0001EE18 /* Main.storyboard */,
 				FDC3827E26CFCBEF0001EE18 /* Assets.xcassets */,
 				FDC3828026CFCBEF0001EE18 /* LaunchScreen.storyboard */,
@@ -137,9 +137,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDC3827A26CFCBEE0001EE18 /* ViewController.swift in Sources */,
 				FDC3827626CFCBEE0001EE18 /* AppDelegate.swift in Sources */,
 				FDC3827826CFCBEE0001EE18 /* SceneDelegate.swift in Sources */,
+				FDDAA4C226D0B5D000370E26 /* ColorSliderViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
