@@ -25,9 +25,7 @@ class ColorSliderViewController: UIViewController {
         super.viewDidLoad()
         setUpDisplayColorView()
         setUpSliders()
-    }
-    
-    override func viewWillLayoutSubviews() {
+        
         redVelueLabel.text = String(format:"%.2f", redColorSlider.value)
         greenValueLabel.text = String(format:"%.2f", greenColorSlider.value)
         blueValueLabel.text = String(format:"%.2f", blueColorSlider.value)
@@ -54,7 +52,12 @@ class ColorSliderViewController: UIViewController {
     // MARK: - Private methods
 
     private func changeDisplayColorView() {
-        displayColorView.backgroundColor = UIColor(red: CGFloat(redColorSlider.value), green: CGFloat(greenColorSlider.value), blue: CGFloat(blueColorSlider.value), alpha: 1.0)
+        displayColorView.backgroundColor = UIColor(
+            red: CGFloat(redColorSlider.value),
+            green: CGFloat(greenColorSlider.value),
+            blue: CGFloat(blueColorSlider.value),
+            alpha: 1.0
+        )
     }
     
     private func setUpDisplayColorView() {
