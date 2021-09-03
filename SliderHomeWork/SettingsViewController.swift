@@ -25,6 +25,7 @@ class SettingsViewController: UIViewController {
     
     // MARK: - Public properties
     var color: UIColor?
+    var delegate: SettingsVCDelegate!
     
     // MARK: - Override methods
     override func viewDidLoad() {
@@ -61,6 +62,7 @@ class SettingsViewController: UIViewController {
     
     @IBAction func doneButtonPressed() {
         view.endEditing(true)
+        delegate.colorChanged(to: displayColorView.backgroundColor ?? .darkGray)
         dismiss(animated: true, completion: nil)
     }
     

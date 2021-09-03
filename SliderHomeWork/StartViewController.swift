@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol SettingsVCDelegate {
+    func colorChanged(to color: UIColor)
+}
+
 class StartViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -17,5 +21,12 @@ class StartViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let settingsVC = segue.destination as? SettingsViewController else { return }
         settingsVC.color = view.backgroundColor
+        settingsVC.delegate = self
+    }
+}
+
+extension StartViewController: SettingsVCDelegate {
+    func colorChanged(to color: UIColor) {
+        view.backgroundColor = color
     }
 }
