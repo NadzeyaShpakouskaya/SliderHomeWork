@@ -1,5 +1,5 @@
 //
-//  ColorSliderViewController.swift
+//  SettingsViewController.swift
 //  SliderHomeWork
 //
 //  Created by Nadzeya Shpakouskaya on 21/08/2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ColorSliderViewController: UIViewController {
+class SettingsViewController: UIViewController {
     // MARK: - IBOutlets
     
     @IBOutlet weak var displayColorView: UIView!
