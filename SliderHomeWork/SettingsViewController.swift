@@ -9,7 +9,6 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     // MARK: - IBOutlets
-    
     @IBOutlet weak var displayColorView: UIView!
     
     @IBOutlet weak var redValueLabel: UILabel!
@@ -24,25 +23,21 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var greenValueTextField: UITextField!
     @IBOutlet weak var blueValueTextField: UITextField!
     
+    // MARK: - Public properties
+    var color: UIColor?
+    
     // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        adjustColorForUI()
         setUpDisplayColorView()
         setUpSliders()
-        
-        redValueLabel.text = String(format:"%.2f", redColorSlider.value)
-        greenValueLabel.text = String(format:"%.2f", greenColorSlider.value)
-        blueValueLabel.text = String(format:"%.2f", blueColorSlider.value)
-        
-        redValueTextField.text = String(format:"%.2f", redColorSlider.value)
-        greenValueTextField.text = String(format:"%.2f", greenColorSlider.value)
-        blueValueTextField.text = String(format:"%.2f", blueColorSlider.value)
         
         redValueTextField.delegate = self
         greenValueTextField.delegate = self
         blueValueTextField.delegate = self
         
-        changeDisplayColorView()
     }
     
     // MARK: - IBActions
@@ -80,6 +75,28 @@ class SettingsViewController: UIViewController {
         )
     }
     
+    private func adjustColorForUI() {
+        guard  let color = color else { return }
+        
+        displayColorView.backgroundColor = color
+        
+        let red = color.rgba.red
+        let green = color.rgba.green
+        let blue = color.rgba.blue
+        
+        redValueLabel.text = String(format:"%.2f", red)
+        greenValueLabel.text = String(format:"%.2f", green)
+        blueValueLabel.text = String(format:"%.2f", blue)
+        
+        redColorSlider.value = Float(red)
+        greenColorSlider.value = Float(green)
+        blueColorSlider.value = Float(blue)
+        
+        redValueTextField.text = String(format:"%.2f", red)
+        greenValueTextField.text = String(format:"%.2f", green)
+        blueValueTextField.text = String(format:"%.2f", blue)
+    }
+    
     private func setUpDisplayColorView() {
         displayColorView.layer.cornerRadius = 20
     }
@@ -113,10 +130,8 @@ extension SettingsViewController: UITextFieldDelegate {
         guard let text = textField.text, let value = Float(text) else {
             informWrongInput(textField)
             return
-            
         }
         let labelText = String(format:"%.2f", value)
-        
         let range = Float(0)...Float(1)
         if range.contains(value) {
             if textField == redValueTextField {
@@ -133,7 +148,7 @@ extension SettingsViewController: UITextFieldDelegate {
         } else {
             informWrongInput(textField)
         }
-  
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -149,5 +164,17 @@ extension SettingsViewController {
     }
 }
 
+extension UIColor {
+    var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        
+        return (red, green, blue, alpha)
+    }
+}
+
 // TODO:
-// 1. when entering number in textfield
+
