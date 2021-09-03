@@ -76,22 +76,22 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="V7Q-ba-4M0">
-                                        <rect key="frame" x="122" y="0.0" width="158" height="134"/>
+                                        <rect key="frame" x="122" y="0.0" width="180" height="134"/>
                                         <subviews>
                                             <slider opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.29999999999999999" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="wxt-Sn-QiA">
-                                                <rect key="frame" x="-2" y="0.0" width="162" height="35"/>
+                                                <rect key="frame" x="-2" y="0.0" width="184" height="35"/>
                                                 <connections>
                                                     <action selector="redSliderValueChanged" destination="BYZ-38-t0r" eventType="valueChanged" id="PKk-x0-0oq"/>
                                                 </connections>
                                             </slider>
                                             <slider opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.29999999999999999" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="wIf-c3-hXq">
-                                                <rect key="frame" x="-2" y="50" width="162" height="35"/>
+                                                <rect key="frame" x="-2" y="50" width="184" height="35"/>
                                                 <connections>
                                                     <action selector="greenSliderValueChanged" destination="BYZ-38-t0r" eventType="valueChanged" id="OrF-i7-VhL"/>
                                                 </connections>
                                             </slider>
                                             <slider opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.29999999999999999" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="3Qe-fU-7z1">
-                                                <rect key="frame" x="-2" y="100" width="162" height="35"/>
+                                                <rect key="frame" x="-2" y="100" width="184" height="35"/>
                                                 <connections>
                                                     <action selector="blueSliderValueChanged" destination="BYZ-38-t0r" eventType="valueChanged" id="jf3-gJ-whx"/>
                                                 </connections>
@@ -99,20 +99,20 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="3Rk-sW-Ff2">
-                                        <rect key="frame" x="296" y="0.0" width="54" height="134"/>
+                                        <rect key="frame" x="318" y="0.0" width="32" height="134"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CKk-Ms-xty">
-                                                <rect key="frame" x="0.0" y="0.0" width="54" height="34"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CKk-Ms-xty">
+                                                <rect key="frame" x="0.0" y="0.0" width="32" height="34"/>
                                                 <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="O13-Bq-FRa">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="O13-Bq-FRa">
                                                 <rect key="frame" x="0.0" y="50" width="32" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="JUv-mn-7A2">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="JUv-mn-7A2">
                                                 <rect key="frame" x="0.0" y="100" width="32" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="16"/>
@@ -120,16 +120,20 @@
                                             </textField>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="fb7-H1-sg0"/>
+                                            <constraint firstAttribute="width" constant="75" id="fb7-H1-sg0"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rks-qc-CUc">
-                                <rect key="frame" x="176.66666666666666" y="420.33333333333331" width="37" height="30"/>
+                                <rect key="frame" x="170" y="420.33333333333331" width="50" height="39"/>
+                                <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="23"/>
                                 <state key="normal" title="Done">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="doneButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="hdY-Op-Ea8"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -149,11 +153,14 @@
                     <connections>
                         <outlet property="blueColorSlider" destination="3Qe-fU-7z1" id="d7R-W9-eJZ"/>
                         <outlet property="blueValueLabel" destination="qvi-du-aa4" id="Y2M-8v-nkh"/>
+                        <outlet property="blueValueTextField" destination="JUv-mn-7A2" id="v8P-QY-cCf"/>
                         <outlet property="displayColorView" destination="5ke-zR-MCS" id="Qcp-L3-KON"/>
                         <outlet property="greenColorSlider" destination="wIf-c3-hXq" id="lwu-B2-sYw"/>
                         <outlet property="greenValueLabel" destination="YiA-sF-6jx" id="Fbu-bu-wdi"/>
+                        <outlet property="greenValueTextField" destination="O13-Bq-FRa" id="Gky-9e-t2D"/>
                         <outlet property="redColorSlider" destination="wxt-Sn-QiA" id="l0N-ju-2nJ"/>
-                        <outlet property="redVelueLabel" destination="c2S-lG-zsb" id="5dZ-Ap-w7o"/>
+                        <outlet property="redValueLabel" destination="c2S-lG-zsb" id="5dZ-Ap-w7o"/>
+                        <outlet property="redValueTextField" destination="CKk-Ms-xty" id="4gc-xh-3Es"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

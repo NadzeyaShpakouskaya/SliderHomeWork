@@ -12,7 +12,7 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var displayColorView: UIView!
     
-    @IBOutlet weak var redVelueLabel: UILabel!
+    @IBOutlet weak var redValueLabel: UILabel!
     @IBOutlet weak var greenValueLabel: UILabel!
     @IBOutlet weak var blueValueLabel: UILabel!
     
@@ -20,37 +20,57 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var greenColorSlider: UISlider!
     @IBOutlet weak var blueColorSlider: UISlider!
     
+    @IBOutlet weak var redValueTextField: UITextField!
+    @IBOutlet weak var greenValueTextField: UITextField!
+    @IBOutlet weak var blueValueTextField: UITextField!
+    
     // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpDisplayColorView()
         setUpSliders()
         
-        redVelueLabel.text = String(format:"%.2f", redColorSlider.value)
+        redValueLabel.text = String(format:"%.2f", redColorSlider.value)
         greenValueLabel.text = String(format:"%.2f", greenColorSlider.value)
         blueValueLabel.text = String(format:"%.2f", blueColorSlider.value)
+        
+        redValueTextField.text = String(format:"%.2f", redColorSlider.value)
+        greenValueTextField.text = String(format:"%.2f", greenColorSlider.value)
+        blueValueTextField.text = String(format:"%.2f", blueColorSlider.value)
+        
+        redValueTextField.delegate = self
+        greenValueTextField.delegate = self
+        blueValueTextField.delegate = self
         
         changeDisplayColorView()
     }
     
     // MARK: - IBActions
     @IBAction func redSliderValueChanged() {
-        redVelueLabel.text = String(format:"%.2f", redColorSlider.value)
+        redValueLabel.text = String(format:"%.2f", redColorSlider.value)
+        redValueTextField.text = String(format:"%.2f", redColorSlider.value)
         changeDisplayColorView()
     }
     
     @IBAction func greenSliderValueChanged() {
         greenValueLabel.text = String(format:"%.2f", greenColorSlider.value)
+        greenValueTextField.text = String(format:"%.2f", greenColorSlider.value)
         changeDisplayColorView()
     }
     
     @IBAction func blueSliderValueChanged() {
         blueValueLabel.text = String(format:"%.2f", blueColorSlider.value)
+        blueValueTextField.text = String(format:"%.2f", blueColorSlider.value)
         changeDisplayColorView()
     }
     
+    @IBAction func doneButtonPressed() {
+        view.endEditing(true)
+        dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - Private methods
-
+    
     private func changeDisplayColorView() {
         displayColorView.backgroundColor = UIColor(
             red: CGFloat(redColorSlider.value),
@@ -69,4 +89,65 @@ class SettingsViewController: UIViewController {
         greenColorSlider.tintColor = UIColor(named: "GreenAppColor") ?? .green
         blueColorSlider.tintColor = UIColor(named: "BlueAppColor") ?? .blue
     }
+    
+    private func showAlert(with title: String, and text:String) {
+        let alert = UIAlertController(
+            title: title,
+            message: text,
+            preferredStyle: .alert
+        )
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
 }
+
+extension SettingsViewController: UITextFieldDelegate {
+    private func informWrongInput(_ textField: UITextField) {
+        textField.text = ""
+        textField.becomeFirstResponder()
+        showAlert(with: "Incorrect value", and: "Please, enter value from 0.00 to 1.00.")
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text, let value = Float(text) else {
+            informWrongInput(textField)
+            return
+            
+        }
+        let labelText = String(format:"%.2f", value)
+        
+        let range = Float(0)...Float(1)
+        if range.contains(value) {
+            if textField == redValueTextField {
+                redValueLabel.text = labelText
+                redColorSlider.value = value
+            } else if textField == greenValueTextField {
+                greenValueLabel.text = labelText
+                greenColorSlider.value = value
+            } else {
+                blueValueLabel.text = labelText
+                blueColorSlider.value = value
+            }
+            changeDisplayColorView()
+        } else {
+            informWrongInput(textField)
+        }
+  
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension SettingsViewController {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+}
+
+// TODO:
+// 1. when entering number in textfield
