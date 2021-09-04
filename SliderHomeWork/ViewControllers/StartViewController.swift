@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SettingsVCDelegate {
-    func colorChanged(to color: UIColor)
+    func colorWasChanged(to color: UIColor)
 }
 
 class StartViewController: UIViewController {
@@ -26,7 +26,7 @@ class StartViewController: UIViewController {
 }
 
 extension StartViewController: SettingsVCDelegate {
-    func colorChanged(to color: UIColor) {
+    func colorWasChanged(to color: UIColor) {
         view.backgroundColor = color
     }
 }

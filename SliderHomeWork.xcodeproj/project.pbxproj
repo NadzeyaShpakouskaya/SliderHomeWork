@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		FDC3827626CFCBEE0001EE18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC3827526CFCBEE0001EE18 /* AppDelegate.swift */; };
 		FDC3827826CFCBEE0001EE18 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC3827726CFCBEE0001EE18 /* SceneDelegate.swift */; };
-		FDC3827D26CFCBEE0001EE18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDC3827B26CFCBEE0001EE18 /* Main.storyboard */; };
 		FDC3827F26CFCBEF0001EE18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDC3827E26CFCBEF0001EE18 /* Assets.xcassets */; };
-		FDC3828226CFCBEF0001EE18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDC3828026CFCBEF0001EE18 /* LaunchScreen.storyboard */; };
 		FDDAA4C226D0B5D000370E26 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDAA4C126D0B5D000370E26 /* SettingsViewController.swift */; };
 		FDFD121526E2461400A529B2 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFD121426E2461400A529B2 /* StartViewController.swift */; };
+		FDFD121C26E3466800A529B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDC3827B26CFCBEE0001EE18 /* Main.storyboard */; };
+		FDFD121D26E3466F00A529B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDC3828026CFCBEF0001EE18 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,16 +58,48 @@
 		FDC3827426CFCBEE0001EE18 /* SliderHomeWork */ = {
 			isa = PBXGroup;
 			children = (
-				FDC3827526CFCBEE0001EE18 /* AppDelegate.swift */,
-				FDC3827726CFCBEE0001EE18 /* SceneDelegate.swift */,
-				FDDAA4C126D0B5D000370E26 /* SettingsViewController.swift */,
-				FDFD121426E2461400A529B2 /* StartViewController.swift */,
-				FDC3827B26CFCBEE0001EE18 /* Main.storyboard */,
-				FDC3827E26CFCBEF0001EE18 /* Assets.xcassets */,
-				FDC3828026CFCBEF0001EE18 /* LaunchScreen.storyboard */,
-				FDC3828326CFCBEF0001EE18 /* Info.plist */,
+				FDFD121B26E345D000A529B2 /* Storyboards */,
+				FDFD121626E342A700A529B2 /* ViewControllers */,
+				FDFD121826E3431900A529B2 /* Resources */,
+				FDFD121726E342D500A529B2 /* App */,
 			);
 			path = SliderHomeWork;
+			sourceTree = "<group>";
+		};
+		FDFD121626E342A700A529B2 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FDDAA4C126D0B5D000370E26 /* SettingsViewController.swift */,
+				FDFD121426E2461400A529B2 /* StartViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FDFD121726E342D500A529B2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				FDC3828326CFCBEF0001EE18 /* Info.plist */,
+				FDC3827526CFCBEE0001EE18 /* AppDelegate.swift */,
+				FDC3827726CFCBEE0001EE18 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		FDFD121826E3431900A529B2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FDC3827E26CFCBEF0001EE18 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FDFD121B26E345D000A529B2 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				FDC3827B26CFCBEE0001EE18 /* Main.storyboard */,
+				FDC3828026CFCBEF0001EE18 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,9 +159,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDC3828226CFCBEF0001EE18 /* LaunchScreen.storyboard in Resources */,
+				FDFD121D26E3466F00A529B2 /* LaunchScreen.storyboard in Resources */,
+				FDFD121C26E3466800A529B2 /* Main.storyboard in Resources */,
 				FDC3827F26CFCBEF0001EE18 /* Assets.xcassets in Resources */,
-				FDC3827D26CFCBEE0001EE18 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,7 +324,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 93336KV4Q7;
-				INFOPLIST_FILE = SliderHomeWork/Info.plist;
+				INFOPLIST_FILE = SliderHomeWork/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -311,7 +343,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 93336KV4Q7;
-				INFOPLIST_FILE = SliderHomeWork/Info.plist;
+				INFOPLIST_FILE = SliderHomeWork/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

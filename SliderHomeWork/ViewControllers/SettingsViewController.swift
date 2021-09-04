@@ -30,10 +30,9 @@ class SettingsViewController: UIViewController {
     // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         adjustColorForUI()
-        setUpDisplayColorView()
-        setUpSliders()
+        setUpUIElements()
         
         redValueTextField.delegate = self
         greenValueTextField.delegate = self
@@ -62,7 +61,7 @@ class SettingsViewController: UIViewController {
     
     @IBAction func doneButtonPressed() {
         view.endEditing(true)
-        delegate.colorChanged(to: displayColorView.backgroundColor ?? .darkGray)
+        delegate.colorWasChanged(to: displayColorView.backgroundColor ?? .darkGray)
         dismiss(animated: true, completion: nil)
     }
     
@@ -80,11 +79,11 @@ class SettingsViewController: UIViewController {
     private func adjustColorForUI() {
         guard  let color = color else { return }
         
-        displayColorView.backgroundColor = color
+        let red = color.rgbaFormat.red
+        let green = color.rgbaFormat.green
+        let blue = color.rgbaFormat.blue
         
-        let red = color.rgba.red
-        let green = color.rgba.green
-        let blue = color.rgba.blue
+        displayColorView.backgroundColor = color
         
         redValueLabel.text = String(format:"%.2f", red)
         greenValueLabel.text = String(format:"%.2f", green)
@@ -99,11 +98,9 @@ class SettingsViewController: UIViewController {
         blueValueTextField.text = String(format:"%.2f", blue)
     }
     
-    private func setUpDisplayColorView() {
+    private func setUpUIElements() {
         displayColorView.layer.cornerRadius = 20
-    }
-    
-    private func setUpSliders() {
+        
         redColorSlider.tintColor = UIColor(named: "RedAppColor") ?? .red
         greenColorSlider.tintColor = UIColor(named: "GreenAppColor") ?? .green
         blueColorSlider.tintColor = UIColor(named: "BlueAppColor") ?? .blue
@@ -122,10 +119,8 @@ class SettingsViewController: UIViewController {
 }
 
 extension SettingsViewController: UITextFieldDelegate {
-    private func informWrongInput(_ textField: UITextField) {
-        textField.text = ""
-        textField.becomeFirstResponder()
-        showAlert(with: "Incorrect value", and: "Please, enter value from 0.00 to 1.00.")
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.addDoneButton()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -133,6 +128,7 @@ extension SettingsViewController: UITextFieldDelegate {
             informWrongInput(textField)
             return
         }
+        
         let labelText = String(format:"%.2f", value)
         let range = Float(0)...Float(1)
         if range.contains(value) {
@@ -157,6 +153,13 @@ extension SettingsViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+    private func informWrongInput(_ textField: UITextField) {
+        textField.text = ""
+        textField.becomeFirstResponder()
+        showAlert(with: "Incorrect value", and: "Please, enter value from 0.00 to 1.00.")
+    }
+    
 }
 
 extension SettingsViewController {
@@ -167,7 +170,7 @@ extension SettingsViewController {
 }
 
 extension UIColor {
-    var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+    var rgbaFormat: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
@@ -178,5 +181,32 @@ extension UIColor {
     }
 }
 
-// TODO:
+extension UITextField {
+    func addDoneButton() {
+        let keyboardToolbar = UIToolbar()
+        let width = UIScreen.main.bounds.width
+        keyboardToolbar.frame = CGRect(x: 0, y: 0, width: width, height: 44)
+        keyboardToolbar.barStyle = .default
+        
+        let flexibleSpace = UIBarButtonItem(
+            barButtonSystemItem: .flexibleSpace,
+            target: nil,
+            action: nil)
+        let doneButton = UIBarButtonItem(
+            title: "Done",
+            style: .done,
+            target: self,
+            action: #selector(doneButtonAction))
+        
+        let items = [flexibleSpace, doneButton]
+        keyboardToolbar.items = items
+        keyboardToolbar.sizeToFit()
+        
+        self.inputAccessoryView = keyboardToolbar
+    }
+    
+    @objc func doneButtonAction() {
+        self.resignFirstResponder()
+    }
+}
 
