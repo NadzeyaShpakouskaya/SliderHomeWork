@@ -24,14 +24,14 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var blueValueTextField: UITextField!
     
     // MARK: - Public properties
-    var color: UIColor?
+    var color: UIColor!
     var delegate: SettingsVCDelegate!
     
     // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        adjustColorForUI()
+        applyColorForUI()
         setUpUIElements()
         
         redValueTextField.delegate = self
@@ -40,33 +40,26 @@ class SettingsViewController: UIViewController {
         
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+    
     // MARK: - IBActions
-    @IBAction func redSliderValueChanged() {
-        redValueLabel.text = String(format:"%.2f", redColorSlider.value)
-        redValueTextField.text = String(format:"%.2f", redColorSlider.value)
-        changeDisplayColorView()
-    }
     
-    @IBAction func greenSliderValueChanged() {
-        greenValueLabel.text = String(format:"%.2f", greenColorSlider.value)
-        greenValueTextField.text = String(format:"%.2f", greenColorSlider.value)
+    @IBAction func sliderValueChanged(_ sender: UISlider) {
         changeDisplayColorView()
-    }
-    
-    @IBAction func blueSliderValueChanged() {
-        blueValueLabel.text = String(format:"%.2f", blueColorSlider.value)
-        blueValueTextField.text = String(format:"%.2f", blueColorSlider.value)
-        changeDisplayColorView()
+        updateText(for: redValueLabel, greenValueLabel, blueValueLabel)
+        updateText(for: redValueTextField, greenValueTextField, blueValueTextField)
     }
     
     @IBAction func doneButtonPressed() {
         view.endEditing(true)
         delegate.colorWasChanged(to: displayColorView.backgroundColor ?? .darkGray)
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
     
     // MARK: - Private methods
-    
     private func changeDisplayColorView() {
         displayColorView.backgroundColor = UIColor(
             red: CGFloat(redColorSlider.value),
@@ -75,28 +68,49 @@ class SettingsViewController: UIViewController {
             alpha: 1.0
         )
     }
+
+    private func updateTextAfterMoving(_ slider: UISlider, for label: UILabel) {
+        label.text =  String(format:"%.2f", slider.value)
+    }
     
-    private func adjustColorForUI() {
-        guard  let color = color else { return }
-        
-        let red = color.rgbaFormat.red
-        let green = color.rgbaFormat.green
-        let blue = color.rgbaFormat.blue
+    private func updateTextAfterMoving(_ slider: UISlider, for textfield: UITextField) {
+        textfield.text =  String(format:"%.2f", slider.value)
+    }
+    
+    private func updateText(for labels: UILabel...) {
+        labels.forEach { label in
+            switch label {
+            case redValueLabel: updateTextAfterMoving(redColorSlider, for: label)
+            case greenValueLabel: updateTextAfterMoving(greenColorSlider, for: label)
+            default: updateTextAfterMoving(blueColorSlider, for: label)
+            }
+        }
+    }
+    
+    private func updateText(for textfields: UITextField...) {
+        textfields.forEach { textfield in
+            switch textfield {
+            case redValueTextField: updateTextAfterMoving(redColorSlider, for: textfield)
+            case greenValueTextField: updateTextAfterMoving(greenColorSlider, for: textfield)
+            default: updateTextAfterMoving(blueColorSlider, for: textfield)
+            }
+        }
+    }
+    
+    private func applyColorForUI() {
+        let ciColor = CIColor(color: color)
         
         displayColorView.backgroundColor = color
+
+        redColorSlider.value = Float(ciColor.red)
+        greenColorSlider.value = Float(ciColor.green)
+        blueColorSlider.value = Float(ciColor.blue)
         
-        redValueLabel.text = String(format:"%.2f", red)
-        greenValueLabel.text = String(format:"%.2f", green)
-        blueValueLabel.text = String(format:"%.2f", blue)
-        
-        redColorSlider.value = Float(red)
-        greenColorSlider.value = Float(green)
-        blueColorSlider.value = Float(blue)
-        
-        redValueTextField.text = String(format:"%.2f", red)
-        greenValueTextField.text = String(format:"%.2f", green)
-        blueValueTextField.text = String(format:"%.2f", blue)
+        updateText(for: redValueLabel, greenValueLabel, blueValueLabel)
+        updateText(for: redValueTextField, greenValueTextField, blueValueTextField)
+
     }
+
     
     private func setUpUIElements() {
         displayColorView.layer.cornerRadius = 20
@@ -116,6 +130,13 @@ class SettingsViewController: UIViewController {
         alert.addAction(okAction)
         present(alert, animated: true)
     }
+    
+    
+    private func informWrongInput(_ textField: UITextField) {
+        textField.text = ""
+        textField.becomeFirstResponder()
+        showAlert(with: "Incorrect value", and: "Please, enter value from 0.00 to 1.00.")
+    }
 }
 
 extension SettingsViewController: UITextFieldDelegate {
@@ -134,50 +155,18 @@ extension SettingsViewController: UITextFieldDelegate {
         if range.contains(value) {
             if textField == redValueTextField {
                 redValueLabel.text = labelText
-                redColorSlider.value = value
+                redColorSlider.setValue(value, animated: true)
             } else if textField == greenValueTextField {
                 greenValueLabel.text = labelText
-                greenColorSlider.value = value
+                greenColorSlider.setValue(value, animated: true)
             } else {
                 blueValueLabel.text = labelText
-                blueColorSlider.value = value
+                blueColorSlider.setValue(value, animated: true)
             }
             changeDisplayColorView()
         } else {
             informWrongInput(textField)
         }
-        
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    private func informWrongInput(_ textField: UITextField) {
-        textField.text = ""
-        textField.becomeFirstResponder()
-        showAlert(with: "Incorrect value", and: "Please, enter value from 0.00 to 1.00.")
-    }
-    
-}
-
-extension SettingsViewController {
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        view.endEditing(true)
-    }
-}
-
-extension UIColor {
-    var rgbaFormat: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 0
-        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        
-        return (red, green, blue, alpha)
     }
 }
 
@@ -187,7 +176,6 @@ extension UITextField {
         let width = UIScreen.main.bounds.width
         keyboardToolbar.frame = CGRect(x: 0, y: 0, width: width, height: 44)
         keyboardToolbar.barStyle = .default
-        
         let flexibleSpace = UIBarButtonItem(
             barButtonSystemItem: .flexibleSpace,
             target: nil,
@@ -200,13 +188,12 @@ extension UITextField {
         
         let items = [flexibleSpace, doneButton]
         keyboardToolbar.items = items
-        keyboardToolbar.sizeToFit()
-        
-        self.inputAccessoryView = keyboardToolbar
+
+       inputAccessoryView = keyboardToolbar
     }
     
     @objc func doneButtonAction() {
-        self.resignFirstResponder()
+       resignFirstResponder()
     }
 }
 
