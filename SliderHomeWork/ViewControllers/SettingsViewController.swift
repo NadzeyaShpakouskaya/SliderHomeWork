@@ -49,17 +49,8 @@ class SettingsViewController: UIViewController {
     
     @IBAction func sliderValueChanged(_ sender: UISlider) {
         changeDisplayColorView()
-        switch sender {
-        case redColorSlider:
-            updateTextAfterMoving(redColorSlider, for: redValueLabel)
-            updateTextAfterMoving(redColorSlider, for: redValueTextField)
-        case greenColorSlider:
-            updateTextAfterMoving(greenColorSlider, for: greenValueLabel)
-            updateTextAfterMoving(greenColorSlider, for: greenValueTextField)
-        default:
-            updateTextAfterMoving(blueColorSlider, for: blueValueLabel)
-            updateTextAfterMoving(blueColorSlider, for: blueValueTextField)
-        }
+        updateText(for: redValueLabel, greenValueLabel, blueValueLabel)
+        updateText(for: redValueTextField, greenValueTextField, blueValueTextField)
     }
     
     @IBAction func doneButtonPressed() {
@@ -86,22 +77,38 @@ class SettingsViewController: UIViewController {
         textfield.text =  String(format:"%.2f", slider.value)
     }
     
+    private func updateText(for labels: UILabel...) {
+        labels.forEach { label in
+            switch label {
+            case redValueLabel: updateTextAfterMoving(redColorSlider, for: label)
+            case greenValueLabel: updateTextAfterMoving(greenColorSlider, for: label)
+            default: updateTextAfterMoving(blueColorSlider, for: label)
+            }
+        }
+    }
+    
+    private func updateText(for textfields: UITextField...) {
+        textfields.forEach { textfield in
+            switch textfield {
+            case redValueTextField: updateTextAfterMoving(redColorSlider, for: textfield)
+            case greenValueTextField: updateTextAfterMoving(greenColorSlider, for: textfield)
+            default: updateTextAfterMoving(blueColorSlider, for: textfield)
+            }
+        }
+    }
+    
     private func applyColorForUI() {
         let ciColor = CIColor(color: color)
         
         displayColorView.backgroundColor = color
-        
-        redValueLabel.text = String(format:"%.2f", ciColor.red)
-        greenValueLabel.text = String(format:"%.2f", ciColor.green)
-        blueValueLabel.text = String(format:"%.2f", ciColor.blue)
-        
+
         redColorSlider.value = Float(ciColor.red)
         greenColorSlider.value = Float(ciColor.green)
         blueColorSlider.value = Float(ciColor.blue)
         
-        redValueTextField.text = String(format:"%.2f", ciColor.red)
-        greenValueTextField.text = String(format:"%.2f", ciColor.green)
-        blueValueTextField.text = String(format:"%.2f", ciColor.blue)
+        updateText(for: redValueLabel, greenValueLabel, blueValueLabel)
+        updateText(for: redValueTextField, greenValueTextField, blueValueTextField)
+
     }
 
     
@@ -148,13 +155,13 @@ extension SettingsViewController: UITextFieldDelegate {
         if range.contains(value) {
             if textField == redValueTextField {
                 redValueLabel.text = labelText
-                redColorSlider.value = value
+                redColorSlider.setValue(value, animated: true)
             } else if textField == greenValueTextField {
                 greenValueLabel.text = labelText
-                greenColorSlider.value = value
+                greenColorSlider.setValue(value, animated: true)
             } else {
                 blueValueLabel.text = labelText
-                blueColorSlider.value = value
+                blueColorSlider.setValue(value, animated: true)
             }
             changeDisplayColorView()
         } else {
@@ -181,7 +188,7 @@ extension UITextField {
         
         let items = [flexibleSpace, doneButton]
         keyboardToolbar.items = items
-        keyboardToolbar.sizeToFit()
+
        inputAccessoryView = keyboardToolbar
     }
     
